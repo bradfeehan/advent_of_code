@@ -5,17 +5,14 @@ defmodule Year2025.Day01Test do
   @input_path Path.expand("../../priv/year2025/day01/input.txt", __DIR__)
 
   describe "part 1" do
-    @tag :skip
     test "works with the sample input" do
       sample = File.read!(@sample_path)
-      assert Year2025.Day01.part(1, sample) == :not_implemented
+      assert Year2025.Day01.part(1, sample) == 3
     end
 
-    @tag :skip
     test "works with the real input" do
       input = File.read!(@input_path)
-      assert Year2025.Day01.part(1, input) == :not_implemented
+      assert Year2025.Day01.part(1, input) == 1076
     end
   end
-
 end
