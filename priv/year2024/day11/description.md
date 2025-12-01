@@ -63,4 +63,8 @@ Consider the arrangement of stones in front of you. *How many stones will you ha
 
 ## Part 2
 
-Part two is still locked. Run `mix aoc.gen 11` again after unlocking it to refresh this file.
+## --- Part Two ---
+
+The Historians sure are taking a long time. To be fair, the infinite corridors *are* very large.
+
+*How many stones would you have after blinking a total of 75 times?*
