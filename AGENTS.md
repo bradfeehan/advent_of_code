@@ -8,6 +8,20 @@ In general, use `mise exec` to run things with dependencies loaded:
 
 Otherwise, you'll get command not found errors for things like `mix`.
 
+## Solving a Day
+
+When starting a day, set up test cases first.
+
+1. Check the description (`priv/dayNN/description.md`) to understand the examples given for part 1.
+2. Convert the example into a test. The code blocks in the description are already extracted to `priv/dayNN/sample.txt`, but there is no consistent format. So you'll first need to adjust the sample data to match what you would like to use as input for your test, and update the test to use it correctly (and also add the correct assertion: the expected value is mentioned in the description towards the end in natural language, and is always a number).
+3. Once you have a test case for the sample data for part 1, remove the line above it tagging it as `skip`, and run `mise exec -- mix test test/dayNN_test.exs`, to see it fail.
+4. Implement the functionality of part 1.
+5. Run `mise exec -- mix aoc.run N P` to output your solution. Present this back to the user. They will enter it as the solution and inform you if it was accepted as correct.
+6. If accepted, the user will return control to you after running `mix aoc.gen` again (which will fetch the description of part 2, as well as generate the part 2 skeleton module).
+7. You can read the description again in the same file, it will have been updated since you saw it in step 1, having appended the part 2 description at the end.
+8. Again set up a test case based on the sample input data and the described expectation in the description. Remove the skip tag and run it to make sure it fails as expected.
+9. Implement part 2, and output the solution when you think you've found it for the user to submit.
+
 ### Elixir Conventions
 - Write idiomatic Elixir, utilising language features for what they're best at
     - This includes pipelines, pattern matching and guards, structs, protocols, streams, enumerations, collectables, comprehensions, processes, concurrency, etc. where appropriate.
