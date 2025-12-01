@@ -1,14 +1,33 @@
 defmodule Day10Test do
   use ExUnit.Case, async: true
 
-  @sample_path Path.expand("../priv/day10/sample.txt", __DIR__)
   @input_path Path.expand("../priv/day10/input.txt", __DIR__)
 
   describe "part 1" do
-    @tag :skip
+    test "works with the first simple example" do
+      # First example: single trailhead with score 1
+      sample = """
+      0123
+      1234
+      8765
+      9876
+      """
+      assert Day10.part(1, sample) == 1
+    end
+
     test "works with the sample input" do
-      sample = File.read!(@sample_path)
-      assert Day10.part(1, sample) == :not_implemented
+      # Using the large example from the description (expected answer: 36)
+      sample = """
+      89010123
+      78121874
+      87430965
+      96549874
+      45678903
+      32019012
+      01329801
+      10456732
+      """
+      assert Day10.part(1, sample) == 36
     end
 
     @tag :skip
