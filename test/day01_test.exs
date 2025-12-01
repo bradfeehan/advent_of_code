@@ -17,9 +17,14 @@ defmodule Day01Test do
   end
 
   describe "part 2" do
-    # test "works with the sample input" do
-    #   sample = File.read!(@sample_path)
-    #   assert Day01.part(2, sample) == 31
-    # end
+    test "works with the sample input" do
+      sample = File.read!(@sample_path)
+      assert Day01.part(2, sample) == 31
+    end
+
+    test "works with the real input" do
+      input = File.read!(@input_path)
+      assert Day01.part(2, input) == 23_609_874
+    end
   end
 end
