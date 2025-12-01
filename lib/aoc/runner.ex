@@ -8,10 +8,11 @@ defmodule Aoc.Runner do
   @spec run(pos_integer(), pos_integer(), keyword()) :: {:ok, term()} | {:error, term()}
   def run(day, part, opts \\ []) do
     project_root = Keyword.get(opts, :project_root, File.cwd!())
-    module = AdventOfCode2024.day_module(day)
+    year = Keyword.get(opts, :year, AdventOfCode.year())
+    module = AdventOfCode.day_module(year, day)
 
     input_path =
-      Path.join([project_root, "priv", AdventOfCode2024.day_directory(day), "input.txt"])
+      Path.join([project_root, "priv", AdventOfCode.day_directory(year, day), "input.txt"])
 
     with {:ok, input} <- File.read(input_path),
          {:module, _} <- Code.ensure_loaded(module),
@@ -27,7 +28,7 @@ defmodule Aoc.Runner do
 
   @spec submission_url(pos_integer(), keyword()) :: String.t()
   def submission_url(day, opts \\ []) do
-    year = Keyword.get(opts, :year, AdventOfCode2024.year())
+    year = Keyword.get(opts, :year, AdventOfCode.year())
     "#{@base_url}/#{year}/day/#{day}/answer"
   end
 end

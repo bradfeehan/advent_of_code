@@ -10,9 +10,10 @@ defmodule Aoc.Generator do
   def generate(%Day{} = day, opts \\ []) do
     project_root = Keyword.get(opts, :project_root, File.cwd!())
     force? = Keyword.get(opts, :force, false)
-    slug = AdventOfCode2024.day_slug(day.day)
-    module_name = module_name(day.day)
-    day_dir = AdventOfCode2024.day_directory(day.day)
+    year = day.year
+    slug = AdventOfCode.day_slug(day.day)
+    module_name = module_name(year, day.day)
+    day_dir = AdventOfCode.day_directory(year, day.day)
     lib_day_dir = Path.join([project_root, "lib", day_dir])
     priv_day_dir = Path.join([project_root, "priv", day_dir])
 
@@ -21,18 +22,21 @@ defmodule Aoc.Generator do
 
     operations =
       [
-        {Path.join([project_root, "lib", "#{day_dir}.ex"]),
+        {Path.join([project_root, "lib", Path.dirname(day_dir), Path.basename(day_dir) <> ".ex"]),
          main_module_template(day, module_name)},
         {Path.join(lib_day_dir, "part1.ex"), part_module_template(day, module_name, 1)}
       ]
       |> maybe_append_part_two(day, module_name, lib_day_dir)
       |> Kernel.++([
-        {Path.join(priv_day_dir, "description.md"), description_template(day, slug),
-         force: true},
+        {Path.join(priv_day_dir, "description.md"), description_template(day, slug), force: true},
         {Path.join(priv_day_dir, "sample.txt"), sample_body(day)},
         {Path.join(priv_day_dir, "input.txt"), ensure_trailing_newline(day.puzzle_input)},
-        {Path.join([project_root, "test", "#{day_dir}_test.exs"]),
-         test_template(day, module_name)}
+        {Path.join([
+           project_root,
+           "test",
+           Path.dirname(day_dir),
+           "#{Path.basename(day_dir)}_test.exs"
+         ]), test_template(day, module_name, day_dir)}
       ])
 
     {:ok, Enum.reduce(operations, %{written: [], skipped: []}, &persist(&1, &2, force?))}
@@ -71,7 +75,7 @@ defmodule Aoc.Generator do
     """
     defmodule #{module_name} do
       @moduledoc \"\"\"
-      Day #{AdventOfCode2024.day_slug(day.day)} — #{day.title}
+      Day #{AdventOfCode.day_slug(day.day)} — #{day.title}
       \"\"\"
 
       @spec part(1 | 2, String.t()) :: term()
@@ -119,7 +123,7 @@ defmodule Aoc.Generator do
 
       @spec solve(String.t()) :: term()
       def solve(_input) do
-        raise \"Day #{AdventOfCode2024.day_slug(day.day)} part #{part} has not been implemented yet\"
+        raise \"Day #{AdventOfCode.day_slug(day.day)} part #{part} has not been implemented yet\"
       end
     end
     """
@@ -177,15 +181,13 @@ defmodule Aoc.Generator do
     end
   end
 
-  defp test_template(day, module_name) do
-    day_dir = AdventOfCode2024.day_directory(day.day)
-
+  defp test_template(day, module_name, day_dir) do
     """
     defmodule #{module_name}Test do
       use ExUnit.Case, async: true
 
-      @sample_path Path.expand("../priv/#{day_dir}/sample.txt", __DIR__)
-      @input_path Path.expand("../priv/#{day_dir}/input.txt", __DIR__)
+      @sample_path Path.expand("../../priv/#{day_dir}/sample.txt", __DIR__)
+      @input_path Path.expand("../../priv/#{day_dir}/input.txt", __DIR__)
 
       describe "part 1" do
         @tag :skip
@@ -228,8 +230,8 @@ defmodule Aoc.Generator do
     """
   end
 
-  defp module_name(day) do
-    AdventOfCode2024.day_module(day)
+  defp module_name(year, day) do
+    AdventOfCode.day_module(year, day)
     |> Module.split()
     |> Enum.join(".")
   end

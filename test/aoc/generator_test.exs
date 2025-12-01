@@ -10,24 +10,24 @@ defmodule Aoc.GeneratorTest do
       day = day_fixture(part_two?: true)
       assert {:ok, summary} = Aoc.Generator.generate(day, project_root: ctx.tmp_dir)
 
-      assert Enum.any?(summary.written, &String.ends_with?(&1, "lib/day01.ex"))
+      assert Enum.any?(summary.written, &String.ends_with?(&1, "lib/year2024/day01.ex"))
 
       assert ctx
-             |> tmp_path("priv/day01/description.md")
+             |> tmp_path("priv/year2024/day01/description.md")
              |> File.read!()
              |> String.contains?("Part 2 text")
 
-      assert File.exists?(tmp_path(ctx, "lib/day01/part2.ex"))
-      assert File.exists?(tmp_path(ctx, "test/day01_test.exs"))
+      assert File.exists?(tmp_path(ctx, "lib/year2024/day01/part2.ex"))
+      assert File.exists?(tmp_path(ctx, "test/year2024/day01_test.exs"))
     end
 
     test "omits part two files when locked", ctx do
       day = day_fixture(part_two?: false)
       assert {:ok, _} = Aoc.Generator.generate(day, project_root: ctx.tmp_dir)
 
-      refute File.exists?(tmp_path(ctx, "lib/day01/part2.ex"))
+      refute File.exists?(tmp_path(ctx, "lib/year2024/day01/part2.ex"))
 
-      description = File.read!(tmp_path(ctx, "priv/day01/description.md"))
+      description = File.read!(tmp_path(ctx, "priv/year2024/day01/description.md"))
       assert description =~ "Part two is still locked"
     end
   end

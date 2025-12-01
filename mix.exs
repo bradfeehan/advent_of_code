@@ -1,9 +1,9 @@
-defmodule AdventOfCode2024.MixProject do
+defmodule AdventOfCode.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :advent_of_code_2024,
+      app: :advent_of_code,
       version: "0.1.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       elixir: "~> 1.19",

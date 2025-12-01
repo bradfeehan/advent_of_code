@@ -9,12 +9,12 @@ defmodule Aoc.Client do
   @base_url "https://adventofcode.com"
   @default_headers [
     {"accept", "text/html,application/xhtml+xml"},
-    {"user-agent", "advent_of_code_2024 (github.com/bradfeehan/advent-of-code-2024)"}
+    {"user-agent", "advent_of_code (github.com/bradfeehan/advent-of-code-2024)"}
   ]
 
   @spec fetch_day(pos_integer(), keyword()) :: {:ok, Day.t()} | {:error, term()}
   def fetch_day(day, opts \\ []) when is_integer(day) do
-    year = Keyword.get(opts, :year, AdventOfCode2024.year())
+    year = Keyword.get(opts, :year, AdventOfCode.year())
 
     with {:ok, _slug} <- safe_day_slug(day),
          {:ok, session} <- fetch_session(opts),
@@ -58,7 +58,7 @@ defmodule Aoc.Client do
   end
 
   defp safe_day_slug(day) do
-    {:ok, AdventOfCode2024.day_slug(day)}
+    {:ok, AdventOfCode.day_slug(day)}
   rescue
     ArgumentError -> {:error, :invalid_day}
   end

@@ -59,7 +59,7 @@ defmodule Mix.Tasks.Aoc.Gen do
           {:ok,
            %{
              day: day,
-             year: opts[:year] || AdventOfCode2024.year(),
+             year: opts[:year] || AdventOfCode.year(),
              session: opts[:session],
              force: opts[:force] || false,
              project_root: File.cwd!()

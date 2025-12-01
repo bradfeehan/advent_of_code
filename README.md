@@ -29,9 +29,9 @@ mise exec -- mix aoc.login
 `mix aoc.gen DAY` downloads the description, puzzle input, and sample data, then
 generates:
 
-- `lib/dayXX.ex` delegator plus `lib/dayXX/part{1,2}.ex` stubs
-- `priv/dayXX/description.md`, `sample.txt`, `input.txt`
-- `test/dayXX_test.exs`
+- `lib/yearYY/dayXX.ex` delegator plus `lib/yearYY/dayXX/part{1,2}.ex` stubs
+- `priv/yearYY/dayXX/description.md`, `sample.txt`, `input.txt`
+- `test/yearYY/dayXX_test.exs`
 
 Example:
 
@@ -49,7 +49,7 @@ After filling in the stubs, execute a solution with:
 mise exec -- mix aoc.run DAY PART
 ```
 
-The task loads `priv/dayXX/input.txt`, calls `DayXX.part(part, input)`, prints
+The task loads `priv/yearYY/dayXX/input.txt`, calls `YearYY.DayXX.part(part, input)`, prints
 the result, and echoes the official submission URL.
 
 ## Project structure
@@ -57,6 +57,6 @@ the result, and echoes the official submission URL.
 - `lib/aoc/*` – shared infrastructure (session storage, HTTP client, generator,
   runner)
 - `lib/mix/tasks/aoc.*` – CLI entry points
-- `priv/dayXX/*` – downloaded assets per day
+- `priv/yearYY/dayXX/*` – downloaded assets per day
 - `test/` – regression tests for the infrastructure plus per-day placeholders
 

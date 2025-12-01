@@ -19,19 +19,19 @@ defmodule Mix.Tasks.Aoc.Run do
   end
 
   defp execute(config) do
-    case Aoc.Runner.run(config.day, config.part, project_root: config.project_root) do
+    case Aoc.Runner.run(config.day, config.part, project_root: config.project_root, year: config.year) do
       {:ok, result} ->
         Mix.shell().info("Result: #{inspect(result)}")
         Mix.shell().info("Submit at #{Aoc.Runner.submission_url(config.day, year: config.year)}")
 
       {:error, :missing_input} ->
         Mix.raise(
-          "Missing input file at priv/#{AdventOfCode2024.day_directory(config.day)}/input.txt. Generate the day first."
+          "Missing input file at priv/#{AdventOfCode.day_directory(config.year, config.day)}/input.txt. Generate the day first."
         )
 
       {:error, :missing_module} ->
         Mix.raise(
-          "Module #{AdventOfCode2024.day_module(config.day)} is undefined. Run `mix aoc.gen #{config.day}`."
+          "Module #{AdventOfCode.day_module(config.year, config.day)} is undefined. Run `mix aoc.gen #{config.day} --year #{config.year}`."
         )
 
       {:error, :missing_part} ->
@@ -61,7 +61,7 @@ defmodule Mix.Tasks.Aoc.Run do
            %{
              day: day,
              part: part,
-             year: opts[:year] || AdventOfCode2024.year(),
+             year: opts[:year] || AdventOfCode.year(),
              project_root: File.cwd!()
            }}
         end
