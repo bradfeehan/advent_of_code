@@ -17,16 +17,14 @@ defmodule Day02Test do
   end
 
   describe "part 2" do
-    @tag :skip
     test "works with the sample input" do
       sample = File.read!(@sample_path)
       assert Day02.part(2, sample) == 4
     end
 
-    @tag :skip
     test "works with the real input" do
       input = File.read!(@input_path)
-      assert Day02.part(2, input) == :not_implemented
+      assert Day02.part(2, input) == 373
     end
   end
 end

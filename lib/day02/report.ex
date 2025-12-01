@@ -30,7 +30,33 @@ defmodule Day02.Report do
   and each adjacent pair differs by 1-3.
   """
   @spec safe?(t()) :: boolean()
-  def safe?(%__MODULE__{levels: levels}) do
+  def safe?(%__MODULE__{levels: levels}), do: safe_levels?(levels)
+
+  @doc """
+  Determines if the report is safe with the Problem Dampener.
+
+  The dampener allows tolerating a single bad level - if removing any one
+  level would make the report safe, it counts as safe.
+  """
+  @spec safe_with_dampener?(t()) :: boolean()
+  def safe_with_dampener?(%__MODULE__{levels: levels}) do
+    safe_levels?(levels) or
+      levels
+      |> subsequences()
+      |> Enum.any?(&safe_levels?/1)
+  end
+
+  # Returns all subsequences of length n-1.
+  # A subsequence is a sequence derived by deleting one element without
+  # changing the order of remaining elements.
+  # e.g. [1,2,3] -> [[2,3], [1,3], [1,2]]
+  @spec subsequences([integer()]) :: [[integer()]]
+  defp subsequences(levels) do
+    for i <- 0..(length(levels) - 1), do: List.delete_at(levels, i)
+  end
+
+  @spec safe_levels?([integer()]) :: boolean()
+  defp safe_levels?(levels) do
     differences = compute_differences(levels)
 
     all_increasing?(differences) or all_decreasing?(differences)
