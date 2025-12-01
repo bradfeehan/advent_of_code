@@ -1,3 +1,12 @@
+## Usage
+
+In general, use `mise exec` to run things with dependencies loaded:
+
+* `mise exec -- mix test`: Run tests
+* `mise exec -- mix deps.get`: Fetch dependencies
+* `mise exec -- mix aoc.run 3 2`: Run day 3 part 2
+
+Otherwise, you'll get command not found errors for things like `mix`.
 
 ### Elixir Conventions
 - Write idiomatic Elixir, utilising language features for what they're best at
