@@ -27,7 +27,8 @@ defmodule Aoc.Generator do
       ]
       |> maybe_append_part_two(day, module_name, lib_day_dir)
       |> Kernel.++([
-        {Path.join(priv_day_dir, "description.md"), description_template(day, slug)},
+        {Path.join(priv_day_dir, "description.md"), description_template(day, slug),
+         force: true},
         {Path.join(priv_day_dir, "sample.txt"), sample_body(day)},
         {Path.join(priv_day_dir, "input.txt"), ensure_trailing_newline(day.puzzle_input)},
         {Path.join([project_root, "test", "#{day_dir}_test.exs"]),
@@ -37,8 +38,12 @@ defmodule Aoc.Generator do
     {:ok, Enum.reduce(operations, %{written: [], skipped: []}, &persist(&1, &2, force?))}
   end
 
-  defp persist({path, body}, acc, force?) do
-    case write_file(path, body, force?) do
+  defp persist({path, body}, acc, force?), do: persist({path, body, []}, acc, force?)
+
+  defp persist({path, body, opts}, acc, force?) do
+    file_force? = force? or Keyword.get(opts, :force, false)
+
+    case write_file(path, body, file_force?) do
       :written -> %{acc | written: [path | acc.written]}
       :skipped -> %{acc | skipped: [path | acc.skipped]}
     end
