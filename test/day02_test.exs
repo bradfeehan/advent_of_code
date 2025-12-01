@@ -5,16 +5,14 @@ defmodule Day02Test do
   @input_path Path.expand("../priv/day02/input.txt", __DIR__)
 
   describe "part 1" do
-    @tag :skip
     test "works with the sample input" do
       sample = File.read!(@sample_path)
-      assert Day02.part(1, sample) == :not_implemented
+      assert Day02.part(1, sample) == 2
     end
 
-    @tag :skip
     test "works with the real input" do
       input = File.read!(@input_path)
-      assert Day02.part(1, input) == :not_implemented
+      assert Day02.part(1, input) == 314
     end
   end
 
@@ -22,7 +20,7 @@ defmodule Day02Test do
     @tag :skip
     test "works with the sample input" do
       sample = File.read!(@sample_path)
-      assert Day02.part(2, sample) == :not_implemented
+      assert Day02.part(2, sample) == 4
     end
 
     @tag :skip
@@ -31,5 +29,4 @@ defmodule Day02Test do
       assert Day02.part(2, input) == :not_implemented
     end
   end
-
 end
