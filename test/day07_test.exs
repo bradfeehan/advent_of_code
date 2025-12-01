@@ -5,10 +5,9 @@ defmodule Day07Test do
   @input_path Path.expand("../priv/day07/input.txt", __DIR__)
 
   describe "part 1" do
-    @tag :skip
     test "works with the sample input" do
       sample = File.read!(@sample_path)
-      assert Day07.part(1, sample) == :not_implemented
+      assert Day07.part(1, sample) == 3749
     end
 
     @tag :skip
