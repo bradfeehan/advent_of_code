@@ -3,8 +3,14 @@ defmodule Year2024.Day11.Part1 do
   Part 1 — Day 11: Plutonian Pebbles
   """
 
-  @spec solve(String.t()) :: term()
-  def solve(_input) do
-    raise "Day 11 part 1 has not been implemented yet"
+  alias Year2024.Day11.Stone
+
+  @spec solve(String.t()) :: integer()
+  def solve(input) do
+    input
+    |> Stone.parse()
+    |> Stone.to_counts()
+    |> Stone.blink_counts(25)
+    |> Stone.count_stones()
   end
 end
