@@ -18,3 +18,7 @@ jobs:
       - name: Install dependencies with mise
         run: |
           ~/.local/bin/mise install
+          ~/.local/bin/mise exec -- mix local.hex --force
+          ~/.local/bin/mise exec -- mix deps.get
+          ~/.local/bin/mise exec -- mix compile
+          ~/.local/bin/mise exec -- mix test
