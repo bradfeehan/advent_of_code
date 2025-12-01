@@ -10,11 +10,21 @@ defmodule Day07Test do
       assert Day07.part(1, sample) == 3749
     end
 
-    @tag :skip
     test "works with the real input" do
       input = File.read!(@input_path)
-      assert Day07.part(1, input) == :not_implemented
+      assert Day07.part(1, input) == 1_620_690_235_709
     end
   end
 
+  describe "part 2" do
+    test "works with the sample input" do
+      sample = File.read!(@sample_path)
+      assert Day07.part(2, sample) == 11387
+    end
+
+    test "works with the real input" do
+      input = File.read!(@input_path)
+      assert Day07.part(2, input) == 145_397_611_075_341
+    end
+  end
 end
