@@ -140,11 +140,23 @@ defmodule Aoc.Client do
   end
 
   defp extract_samples(document) do
+    # Only extract samples from Part 1 (first article.day-desc) to avoid
+    # duplicates when Part 2 repeats the same example
     document
-    |> Floki.find("article.day-desc pre code")
-    |> Enum.map(&Floki.text(&1, sep: "\n"))
-    |> Enum.map(&String.trim/1)
-    |> Enum.reject(&(&1 == ""))
+    |> Floki.find("article.day-desc")
+    |> List.first()
+    |> case do
+      nil ->
+        []
+
+      first_article ->
+        first_article
+        |> Floki.find("pre code")
+        |> Enum.map(&Floki.text(&1, sep: "\n"))
+        |> Enum.map(&String.trim/1)
+        |> Enum.reject(&(&1 == ""))
+        |> Enum.uniq()
+    end
   end
 
   defp normalize_input(input) do
