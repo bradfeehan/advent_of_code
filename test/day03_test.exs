@@ -5,10 +5,9 @@ defmodule Day03Test do
   @input_path Path.expand("../priv/day03/input.txt", __DIR__)
 
   describe "part 1" do
-    @tag :skip
     test "works with the sample input" do
       sample = File.read!(@sample_path)
-      assert Day03.part(1, sample) == :not_implemented
+      assert Day03.part(1, sample) == 161
     end
 
     @tag :skip
@@ -19,10 +18,10 @@ defmodule Day03Test do
   end
 
   describe "part 2" do
-    @tag :skip
     test "works with the sample input" do
-      sample = File.read!(@sample_path)
-      assert Day03.part(2, sample) == :not_implemented
+      # Part 2 has a different sample than part 1 (includes do/don't instructions)
+      sample = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+      assert Day03.part(2, sample) == 48
     end
 
     @tag :skip
@@ -31,5 +30,4 @@ defmodule Day03Test do
       assert Day03.part(2, input) == :not_implemented
     end
   end
-
 end
