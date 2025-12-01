@@ -10,10 +10,9 @@ defmodule Year2024.Day12Test do
       assert Year2024.Day12.part(1, sample) == 1930
     end
 
-    @tag :skip
     test "works with the real input" do
       input = File.read!(@input_path)
-      assert Year2024.Day12.part(1, input) == :not_implemented
+      assert Year2024.Day12.part(1, input) == 1381056
     end
   end
 
@@ -23,10 +22,9 @@ defmodule Year2024.Day12Test do
       assert Year2024.Day12.part(2, sample) == 1206
     end
 
-    @tag :skip
     test "works with the real input" do
       input = File.read!(@input_path)
-      assert Year2024.Day12.part(2, input) == :not_implemented
+      assert Year2024.Day12.part(2, input) == 834828
     end
   end
 
