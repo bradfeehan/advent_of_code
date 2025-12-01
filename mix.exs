@@ -23,11 +23,12 @@ defmodule AdventOfCode.MixProject do
   defp elixirc_paths(_env), do: ["lib"]
 
   # Run "mix help deps" to learn about dependencies.
+  # Note: Dependencies temporarily commented out due to network issues
   defp deps do
     [
-      {:floki, "~> 0.38"},
-      {:htmd, "~> 0.2"},
-      {:req, "~> 0.5"}
+      # {:floki, "~> 0.38"},
+      # {:htmd, "~> 0.2"},
+      # {:req, "~> 0.5"}
     ]
   end
 end
