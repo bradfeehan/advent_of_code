@@ -125,8 +125,7 @@ defmodule Aoc.Client do
             ul_bullet_spacing: 1,
             preformatted_code: true
           )
-          |> String.trim(),
-        unlocked?: true
+          |> String.trim()
       }
     end)
   end

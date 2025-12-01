@@ -21,13 +21,12 @@ defmodule Aoc.Client.Day do
   defmodule Part do
     @moduledoc "Represents the rendered Markdown for a single puzzle part."
 
-    @enforce_keys [:number, :markdown, :unlocked?]
-    defstruct [:number, :markdown, :unlocked?]
+    @enforce_keys [:number, :markdown]
+    defstruct [:number, :markdown]
 
     @type t :: %__MODULE__{
             number: pos_integer(),
-            markdown: String.t(),
-            unlocked?: boolean()
+            markdown: String.t()
           }
   end
 end

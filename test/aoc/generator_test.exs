@@ -44,10 +44,10 @@ defmodule Aoc.GeneratorTest do
       puzzle_input: "1\n2\n3",
       parts:
         [
-          %Part{number: 1, markdown: "Part 1 text", unlocked?: true}
+          %Part{number: 1, markdown: "Part 1 text"}
         ] ++
           if part_two? do
-            [%Part{number: 2, markdown: "Part 2 text", unlocked?: true}]
+            [%Part{number: 2, markdown: "Part 2 text"}]
           else
             []
           end
