@@ -15,4 +15,16 @@ defmodule Year2025.Day01Test do
       assert Year2025.Day01.part(1, input) == 1076
     end
   end
+
+  describe "part 2" do
+    test "works with the sample input" do
+      sample = File.read!(@sample_path)
+      assert Year2025.Day01.part(2, sample) == 6
+    end
+
+    test "works with the real input" do
+      input = File.read!(@input_path)
+      assert Year2025.Day01.part(2, input) == 6379
+    end
+  end
 end
