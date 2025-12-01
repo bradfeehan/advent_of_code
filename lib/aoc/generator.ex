@@ -186,13 +186,13 @@ defmodule Aoc.Generator do
         @tag :skip
         test "works with the sample input" do
           sample = File.read!(@sample_path)
-          # assert #{module_name}.part(1, sample) == ...
+          assert #{module_name}.part(1, sample) == :not_implemented
         end
 
         @tag :skip
         test "works with the real input" do
           input = File.read!(@input_path)
-          # assert #{module_name}.part(1, input) == ...
+          assert #{module_name}.part(1, input) == :not_implemented
         end
       end
     #{part_two_test_block(day, module_name)}
@@ -211,13 +211,13 @@ defmodule Aoc.Generator do
         @tag :skip
         test "works with the sample input" do
           sample = File.read!(@sample_path)
-          # assert #{module_name}.part(2, sample) == ...
+          assert #{module_name}.part(2, sample) == :not_implemented
         end
 
         @tag :skip
         test "works with the real input" do
           input = File.read!(@input_path)
-          # assert #{module_name}.part(2, input) == ...
+          assert #{module_name}.part(2, input) == :not_implemented
         end
       end
     """
