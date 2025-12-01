@@ -17,4 +17,17 @@ defmodule Day09Test do
     end
   end
 
+  describe "part 2" do
+    test "works with the sample input" do
+      sample = File.read!(@sample_path) |> String.split("\n") |> List.first() |> String.trim()
+      assert Day09.part(2, sample) == 2858
+    end
+
+    @tag :skip
+    test "works with the real input" do
+      input = File.read!(@input_path) |> String.trim()
+      assert Day09.part(2, input) == :not_implemented
+    end
+  end
+
 end
