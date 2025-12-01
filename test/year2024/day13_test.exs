@@ -15,5 +15,4 @@ defmodule Year2024.Day13Test do
       assert Year2024.Day13.part(1, input) == 28_262
     end
   end
-
 end
