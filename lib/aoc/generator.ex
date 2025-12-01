@@ -180,12 +180,19 @@ defmodule Aoc.Generator do
       use ExUnit.Case, async: true
 
       @sample_path Path.expand("../priv/#{day_dir}/sample.txt", __DIR__)
+      @input_path Path.expand("../priv/#{day_dir}/input.txt", __DIR__)
 
       describe "part 1" do
         @tag :skip
         test "works with the sample input" do
           sample = File.read!(@sample_path)
           # assert #{module_name}.part(1, sample) == ...
+        end
+
+        @tag :skip
+        test "works with the real input" do
+          input = File.read!(@input_path)
+          # assert #{module_name}.part(1, input) == ...
         end
       end
     #{part_two_test_block(day, module_name)}
@@ -205,6 +212,12 @@ defmodule Aoc.Generator do
         test "works with the sample input" do
           sample = File.read!(@sample_path)
           # assert #{module_name}.part(2, sample) == ...
+        end
+
+        @tag :skip
+        test "works with the real input" do
+          input = File.read!(@input_path)
+          # assert #{module_name}.part(2, input) == ...
         end
       end
     """
