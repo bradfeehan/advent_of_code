@@ -1,18 +1,19 @@
-defmodule Year2024.Day13.Part1 do
+defmodule Year2024.Day13.Part2 do
   @moduledoc """
-  Part 1 — Day 13: Claw Contraption
+  Part 2 — Day 13: Claw Contraption
 
-  Each claw machine has two buttons (A and B) that move the claw by specific amounts.
-  Button A costs 3 tokens, Button B costs 1 token.
-  Find the minimum tokens needed to reach each prize location.
+  Same as Part 1, but prize coordinates are offset by 10000000000000
+  and there is no 100-press limit.
   """
 
   alias Year2024.Day13.Parser
 
+  @offset 10_000_000_000_000
+
   @spec solve(String.t()) :: integer()
   def solve(input) do
     input
-    |> Parser.parse_machines()
+    |> Parser.parse_machines(@offset)
     |> Enum.map(&solve_machine/1)
     |> Enum.sum()
   end
@@ -39,8 +40,8 @@ defmodule Year2024.Day13.Part1 do
         a = div(a_num, det)
         b = div(b_num, det)
 
-        # Check constraints: both must be non-negative and <= 100
-        if a >= 0 and a <= 100 and b >= 0 and b <= 100 do
+        # Only check for non-negative values (no 100-press limit in Part 2)
+        if a >= 0 and b >= 0 do
           3 * a + b
         else
           0
