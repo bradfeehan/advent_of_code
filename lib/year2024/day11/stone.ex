@@ -24,15 +24,16 @@ defmodule Year2024.Day11.Stone do
   def transform(0), do: [1]
 
   def transform(stone) do
-    digits = Integer.to_string(stone)
-    len = String.length(digits)
+    digits = Integer.digits(stone)
+    len = length(digits)
 
-    if rem(len, 2) == 0 do
-      mid = div(len, 2)
-      {left, right} = String.split_at(digits, mid)
-      [String.to_integer(left), String.to_integer(right)]
-    else
-      [stone * 2024]
+    case rem(len, 2) do
+      0 ->
+        {left, right} = Enum.split(digits, div(len, 2))
+        [Integer.undigits(left), Integer.undigits(right)]
+
+      _ ->
+        [stone * 2024]
     end
   end
 
@@ -46,8 +47,7 @@ defmodule Year2024.Day11.Stone do
   def blink_counts(counts, times) do
     counts
     |> Enum.flat_map(fn {stone, count} ->
-      transform(stone)
-      |> Enum.map(fn new_stone -> {new_stone, count} end)
+      Enum.map(transform(stone), &{&1, count})
     end)
     |> Enum.reduce(%{}, fn {stone, count}, acc ->
       Map.update(acc, stone, count, &(&1 + count))
@@ -59,11 +59,7 @@ defmodule Year2024.Day11.Stone do
   Count total stones from a frequency map.
   """
   @spec count_stones(map()) :: integer()
-  def count_stones(counts) do
-    counts
-    |> Map.values()
-    |> Enum.sum()
-  end
+  def count_stones(counts), do: counts |> Map.values() |> Enum.sum()
 
   @doc """
   Convert a list of stones to a frequency map.
