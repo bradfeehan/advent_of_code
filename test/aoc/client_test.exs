@@ -25,6 +25,6 @@ defmodule Aoc.ClientTest do
   end
 
   defp fixture(name) do
-    Path.expand("../../#{name}", __DIR__)
+    Path.expand("../support/fixtures/#{name}", __DIR__)
   end
 end
